@@ -3,14 +3,11 @@ import "./App.css";
 import firebase  from "firebase/compat/app";
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {} from '@fortawesome/free-solid-svg-icons'
-import {faYoutubeFilled} from '@fortawesome/free-brands-svg-icons'
+
 // firebase hooks start
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { YoutubeFilled } from "@ant-design/icons";
 
 // firebase hooks ends
 firebase.initializeApp({
@@ -116,8 +113,8 @@ return (
     </section>
     <div className="smallSignIn">
       <h1>Alohaass</h1>
-    <button onClick={signInWithGoogle}><FontAwesomeIcon icon="fa-brands fa-google"/></button>
-    <button onClick={signInWithFacebook}></button>
+    <button onClick={signInWithGoogle}>SignIn with Google</button>
+    <button onClick={signInWithFacebook}>SignIn with Facebook</button>
     </div>
     </main>
   </div>
