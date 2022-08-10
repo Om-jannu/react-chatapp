@@ -93,7 +93,10 @@ const Signin=()=> {
       auth.signInWithPopup(provider);
   }
 return (
-  <div>
+  <div className="signinPage">
+    <header>
+      <h1>Alohaass Chat</h1>
+    </header>
       <button onClick={signInWithGoogle}>Sign in</button>
   </div>
 )
