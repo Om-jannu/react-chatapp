@@ -1,3 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .signinPage {
-  background-color: yellow;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.signinPage img {
+  width: 100%;
+  height: 100%;
+}
+.signinPage main {
+  position: absolute;
+  width: 65%;
+  height: 80%;
+  display: flex;
+}
+.signinPage main section {
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  width: 65%;
+  height: 100%;
+}
+.signinPage main section img {
+  width: 100%;
+  height: 100%;
+}
+.signinPage main .smallSignIn {
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  background-color: green;
+  border-radius: 0.5rem;
+  width: 40%;
+  height: 75%;
 }/*# sourceMappingURL=App.css.map */

@@ -3,11 +3,14 @@ import "./App.css";
 import firebase  from "firebase/compat/app";
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {} from '@fortawesome/free-solid-svg-icons'
+import {faYoutubeFilled} from '@fortawesome/free-brands-svg-icons'
 // firebase hooks start
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { YoutubeFilled } from "@ant-design/icons";
 
 // firebase hooks ends
 firebase.initializeApp({
@@ -89,15 +92,34 @@ const ChatMessage =(props) => {
 
 const Signin=()=> {
   const signInWithGoogle = () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider);
+      } catch (error) {
+        alert(error);
+      }
+  }
+  const signInWithFacebook = () => {
+      try {
+        const provider = new firebase.auth.FacebookAuthProvider();
+      auth.signInWithPopup(provider);
+      } catch (error) {
+        alert(error);
+      }
   }
 return (
   <div className="signinPage">
-    <header>
-      <h1>Alohaass Chat</h1>
-    </header>
-      <button onClick={signInWithGoogle}>Sign in</button>
+    <img src="./images/beachBackground.jpg" alt="" />
+    <main>
+    <section>
+      <img src="" alt="" />
+    </section>
+    <div className="smallSignIn">
+      <h1>Alohaass</h1>
+    <button onClick={signInWithGoogle}><FontAwesomeIcon icon="fa-brands fa-google"/></button>
+    <button onClick={signInWithFacebook}></button>
+    </div>
+    </main>
   </div>
 )
 }
