@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import "./App.css";
-import firebase  from "firebase/compat/app";
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
+import beachvdo from './component/video/beachvideo.mp4';
+import {FaGoogle} from "react-icons";
 
 // firebase hooks start
 
@@ -17,7 +19,7 @@ firebase.initializeApp({
   storageBucket: "react-chatapp-cf8c7.appspot.com",
   messagingSenderId: "1069624741086",
   appId: "1:1069624741086:web:5d0b6a2b15bd748956464f",
-  measurementId: "G-BS577HD9J9"
+  measurementId: "G-BS577HD9J9",
 });
 
 const auth = firebase.auth();
@@ -28,100 +30,108 @@ const App = () => {
 
   return (
     <div>
-    <header>
-      <Signout/>
-    </header>
-    <section>
-    {user ? <Chatroom/> : <Signin/>}
-    </section>
+      <header>
+        <Signout />
+      </header>
+      <section>{user ? <Chatroom /> : <Signin />}</section>
     </div>
-  )
+  );
 };
 
-const Chatroom = ()=> {
+const Chatroom = () => {
   const messageRef = firestore.collection("messages");
   const query = messageRef.orderBy("createdAt").limit(25);
   const [messages] = useCollectionData(query, { idField: "id" });
-  const [formValue,setFormValue] = useState("");
+  const [formValue, setFormValue] = useState("");
   const dummy = useRef();
 
-  const sendMessage = async(e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
 
-    const {uid,photoURL} = auth.currentUser;
+    const { uid, photoURL } = auth.currentUser;
     await messageRef.add({
-      text:formValue,
-      createdAt : firebase.firestore.FieldValue.serverTimestamp(),
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      photoURL
+      photoURL,
     });
-    setFormValue('');
-    dummy.current.scrollIntoView({behaviour : 'smooth'});
-  }
-  
+    setFormValue("");
+    dummy.current.scrollIntoView({ behaviour: "smooth" });
+  };
+
   return (
     <div>
-        <main>
-        {messages && messages.map( msg => <ChatMessage key={msg.id} message={msg}  />)}
+      <main>
+        {messages &&
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
         <div ref={dummy}></div>
-        </main>
-        <form onSubmit={sendMessage}>
-          <input value={formValue} onChange={(e)=>{
+      </main>
+      <form onSubmit={sendMessage}>
+        <input
+          value={formValue}
+          onChange={(e) => {
             setFormValue(e.target.value);
-          }}/>
-          <button type="submit">Send</button>
-        </form>
+          }}
+        />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
-}
+};
 
-const ChatMessage =(props) => {
-
-    const {text,uid,photoURL} = props.message;
-    const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
+const ChatMessage = (props) => {
+  const { text, uid, photoURL } = props.message;
+  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
   return (
     <div className={`message ${messageClass}`}>
-      <img alt={auth.currentUser.displayName} src={photoURL}/>
+      <img alt={auth.currentUser.displayName} src={photoURL} />
       <p>{text}</p>
     </div>
-  )
-}
+  );
+};
 
-const Signin=()=> {
+const Signin = () => {
   const signInWithGoogle = () => {
-      try {
-        const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider);
-      } catch (error) {
-        alert(error);
-      }
-  }
+    } catch (error) {
+      alert(error);
+    }
+  };
   const signInWithFacebook = () => {
-      try {
-        const provider = new firebase.auth.FacebookAuthProvider();
+    try {
+      const provider = new firebase.auth.FacebookAuthProvider();
       auth.signInWithPopup(provider);
-      } catch (error) {
-        alert(error);
-      }
-  }
-return (
-  <div className="signinPage">
-    <img src="./images/beachBackground.jpg" alt="" />
-    <main>
-    <section>
-      <img src="" alt="" />
-    </section>
-    <div className="smallSignIn">
-      <h1>Alohaass</h1>
-    <button onClick={signInWithGoogle}>SignIn with Google</button>
-    <button onClick={signInWithFacebook}>SignIn with Facebook</button>
+    } catch (error) {
+      alert(error);
+    }
+  };
+  return (
+    <div className="signinPage">
+      <video autoPlay loop muted>
+        <source src={beachvdo} type="video/mp4"/>
+      </video>
+      
+      <main>
+          <div className="signInContent">
+            <h1>Alohaass</h1>
+            <p><img src="./images/grouppeople.png" alt="group of people logo" /><p>Group Chat Application <br /> to have fun with friends 😉</p></p>
+            <button className="signInButton" onClick={signInWithGoogle}><img src="./images/google.png" alt="google logo" /><p>Google</p>
+            </button>
+            <button className="signInButton" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="facebook logo" /><p>Facebook</p>
+            </button>
+          </div>
+          <section>
+          <img src="./images/chatHeroImage.png" alt="chat hero image" />
+        </section>
+      </main>
+        
     </div>
-    </main>
-  </div>
-)
-}
+  );
+};
 
-const Signout=() => {
+const Signout = () => {
   return (
     auth.currentUser && (
       <button
@@ -133,6 +143,6 @@ const Signout=() => {
       </button>
     )
   );
-}
+};
 
 export default App;

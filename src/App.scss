@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Oleo+Script+Swash+Caps&display=swap');
 @mixin align($justify-content,$align-item,$text-align) {
     justify-content: $justify-content;
     align-items: $align-item;
@@ -8,6 +8,11 @@
     width: $width;
     height: $height;
 }
+
+$primary-color : #5ae4a7;
+$secondary-color : #1c2e35;
+$tertiary-color : #a4a4a4;
+$quatery-color : #d6f7e7;
 *{
     margin: 0;
     padding: 0;
@@ -20,28 +25,72 @@
     display: flex;
     overflow-y: hidden;
     @include align(center, center, center);
-    img{
-        @include widthandheight(100%,100%);
+    video{
+        @include widthandheight(10000px,10000px);
     }
+    
     main{
+        @include widthandheight(70%, 80%);
         position: absolute;
-        @include widthandheight(65%,80%);
+        
         display: flex;
-        section{
-            // padding: 0.5rem;
-            background-color: whitesmoke;
-            border-radius: 0.5rem;
-            @include widthandheight(65%,100%);
-            img{
-                @include widthandheight(100%,100%);
+        @include align(space-evenly, center ,center);
+        .signInContent{
+            @include widthandheight(50%,80%);
+            backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            @include align(center, center, center);
+            background-color: rgba(0, 0, 0, 0.2);
+            transform: translateX(2rem);
+            border-radius: 1rem;
+            h1{
+                color: $primary-color;
+                font-family: 'Monoton', cursive;
+                font-size: 3rem;
+                transform: translateY(-2rem);
+            }
+            p{
+                width: 80%;
+
+                img{
+                    @include widthandheight(2rem,2rem);
+                    object-fit: cover;
+                }
+            }
+            button{
+                width: 70%;
+                border: none;
+                padding: 1rem;
+                margin:0.5rem 0;
+                border-radius: 0.5rem;
+                background-color: $quatery-color;
+                color: $secondary-color;
+                display: flex;
+                @include align(center, center,center);
+                cursor: pointer;
+                img{
+                    @include widthandheight(10%,100%);
+                    object-fit: cover;
+                }
+                p{
+                    padding: 0 1rem;
+                    font-size: large;
+                    font-weight: bold;
+                }
             }
         }
-        .smallSignIn{
-            position: absolute;
-            right: 5%;top: 10%;
-            background-color: green;
-            border-radius: 0.5rem;
-            @include widthandheight(40%,75%);
+        section{
+            background-color: $quatery-color;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            display: flex;
+            @include align(center, center ,center);
+            border-radius: 1rem;
+            @include widthandheight(50%,100% );
+            img{
+                @include widthandheight(60% ,60%);
+                object-fit: cover;
+            }
         }
     }
 }
