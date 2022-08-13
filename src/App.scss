@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap');
 @mixin align($justify-content, $align-item, $text-align) {
   justify-content: $justify-content;
   align-items: $align-item;
@@ -19,6 +19,7 @@ $quatery-color: #d6f7e7;
   box-sizing: border-box;
   overflow-x: hidden;
   transition: all 0.2s ease-in-out;
+  font-family: 'Barlow', sans-serif;
   &::-webkit-scrollbar{
     width: 1rem;
     background-color: #5ae4a7;
