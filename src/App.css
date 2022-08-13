@@ -6,6 +6,15 @@
   overflow-x: hidden;
   transition: all 0.2s ease-in-out;
 }
+*::-webkit-scrollbar {
+  width: 1rem;
+  background-color: #5ae4a7;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #1c2e35;
+  width: 0.5rem;
+  border-radius: 0.3rem;
+}
 
 img {
   -o-object-fit: cover;
