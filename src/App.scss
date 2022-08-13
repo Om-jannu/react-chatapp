@@ -20,6 +20,9 @@ $quatery-color: #d6f7e7;
   overflow-x: hidden;
   transition: all 0.2s ease-in-out;
 }
+img {
+  object-fit: cover;
+}
 .signinPage {
   height: 100vh;
   width: 100%;
@@ -119,7 +122,8 @@ $quatery-color: #d6f7e7;
     position: fixed;
   }
   .chatMessageSection {
-    // position: absolute;
+    position: absolute;
+    right: 5%;
     @include widthandheight(100%, 100vh);
     display: flex;
     @include align(center, center, center);
@@ -135,13 +139,14 @@ $quatery-color: #d6f7e7;
       background-color: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(2px);
       border-radius: 1rem;
-      p{
+      
+      p {
         font-family: "Courgette", cursive;
-          color: $quatery-color;
-          font-size: medium;
-          font-weight: bold;
-          text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-          padding-left: 3rem;
+        color: $quatery-color;
+        font-size: medium;
+        font-weight: bold;
+        text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
+        padding-left: 3rem;
       }
       .chatroomHead {
         display: flex;
@@ -159,105 +164,181 @@ $quatery-color: #d6f7e7;
     }
     .chatroomContainer {
       position: relative;
-      right: -20%;
-      @include widthandheight(50%,90% );
+      right: -25%;
+      @include widthandheight(50%, 90%);
       background-color: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(2px);
       display: flex;
       flex-direction: column;
       border-radius: 0.2rem;
-      .messagebox{
+      .messagebox {
+        padding: 1rem;
         height: 90%;
-        .message{
-            width: 70%;
+        .message {
+          display: block;
+          width: 100%;
+          word-wrap: break-word;
+          padding: 1rem;
+          margin: 0 1rem;
+          display: flex;
+          align-items: center;
+          img {
+            @include widthandheight(3rem, 3rem);
+            border-radius: 50%;
+          }
+          p {
+            padding: 0.7rem 1rem;
+            border-radius: 0.5rem;
             word-wrap: break-word;
-            padding: 1rem;
-            margin:0 1rem ;
-            display: flex;
-            align-items: center;
-            img{
-                @include widthandheight(3rem,3rem);
-                border-radius: 50%;
-            }
-            p{
-                padding:0.7rem 1rem;
-                border-radius: 0.5rem;
-                word-wrap: break-word;
-                word-break: keep-all;
-                text-align: left;
-            }
+            word-break: keep-all;
+            text-align: left;
+          }
         }
-        .sent{
-            flex-direction: row-reverse;
-            float: right;
-            p{
-                background-color: $quatery-color;
-                margin-right: 1rem;
-            }
+        .sent {
+          flex-direction: row-reverse;
+          float: right;
+          p {
+            background-color: $primary-color;
+            margin-right: 1rem;
+          }
         }
-        .received{
-            float: left;
-            p{
-                background-color: $secondary-color;
-                color: $tertiary-color;
-                margin-left: 1rem;
-            }
+        .received {
+          float: left;
+          p {
+            background-color: $secondary-color;
+            color: $tertiary-color;
+            margin-left: 1rem;
+          }
         }
       }
-      .inputbox{
+      .inputbox {
         position: fixed;
         bottom: 0;
         width: 100%;
-        form{
-            @include widthandheight(100%,100%);
-            display: flex;
-            @include align(space-evenly, center, center);
-            flex-direction: row;
-            input{
-                @include widthandheight(85%,100%);
-                padding: 1rem;
-                background-color: $quatery-color;
-                border: none;
+        form {
+          @include widthandheight(100%, 100%);
+          display: flex;
+          @include align(space-evenly, center, center);
+          flex-direction: row;
+          input {
+            @include widthandheight(85%, 100%);
+            padding: 1rem;
+            background-color: $quatery-color;
+            border: none;
+          }
+          button {
+            @include widthandheight(15%, 100%);
+            padding: 1rem;
+            border: none;
+            background-color: $primary-color;
+            cursor: pointer;
+            &:hover img {
+              transform: scale(1.5);
             }
-            button{
-                @include widthandheight(15%,100%);
-                padding:1rem;
-                border: none;
-                background-color: $primary-color;
-                cursor: pointer;
-                &:hover img{
-                    transform: scale(1.5);
-                }
-                img{
-                    @include widthandheight(0.9rem ,0.9rem );
-                }
+            img {
+              @include widthandheight(0.9rem, 0.9rem);
             }
+          }
         }
       }
     }
   }
 }
-.logoutbtn{
+.logoutbtn {
+  display: flex;
+  @include align(space-evenly, center, center);
+  width: 70%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  background-color: $primary-color;
+  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+  cursor: pointer;
+  img {
+    @include widthandheight(2rem, 2rem);
+  }
+  p {
+    font-size: medium;
+    font-weight: bold;
+    color: $secondary-color;
+  }
+  &:hover {
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+  }
+}
+.mobileLogout{
+    display: none;
+  }
+@media (max-width: 600px) {
+  .signinPage {
+    video {
+      display: none;
+    }
+    main {
+      @include widthandheight(100%, 100%);
+      background-color: $primary-color;
+
+      .signInContent {
+        @include widthandheight(100%, 100%);
+        h1 {
+          text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
+        }
+      }
+      section {
+        display: none;
+      }
+    }
+  }
+  .chatRoom {
+    @include widthandheight(100%, 100vh);
+    display: flex;
+    @include align(center, center, center);
+    video {
+      position: fixed;
+    }
+    .chatMessageSection {
+        right: 0;
+      @include widthandheight(100%, 100vh);
+      display: flex;
+      @include align(center, center, center);
+      .chatroomHeader {
+        display: none;
+      }
+      .chatroomContainer {
+        left: 0;
+        @include widthandheight(100%, 100%);
+        background-color: rgba(0, 0, 0, 0.5);
+        .messagebox {
+          padding: 0;
+          .message {
+            width: 100%;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+  .mobileLogout{
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     @include align(space-evenly, center ,center);
-    width: 70%;
-    padding: 0.5rem 1rem;
-    border-radius: 0.3rem;
-    border: none;
-    background-color: $primary-color;
-    box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.3);
-    margin-top: 1rem;
-    cursor: pointer;
-    img{
-        @include widthandheight(2rem,2rem );
+    width: 100%;
+    background-color: $secondary-color;
+    padding:0.7rem 1rem;
+    h1{
+        color: $primary-color;
+          font-family: "Monoton", cursive;
+          font-size: 2rem;
+          text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
     }
-    p{
-        font-size: medium;
-        font-weight: bold;
-        color: $secondary-color;
-    }
-    &:hover{
-        box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
-        transform: scale(1.05);
-    }
+  }
+  .logoutbtn{
+  width: 40%;
+  box-shadow: none;
+  margin-top: 0;
+}
 }

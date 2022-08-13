@@ -89,6 +89,10 @@ const Chatroom = () => {
             </form>
           </div>
         </div>
+        <div className="mobileLogout">
+          <h1>Alohaa</h1>
+          <Signout/>
+        </div>
       </div>
     </div>
   );
