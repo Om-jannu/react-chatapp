@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  transition: all 0.2s ease-in-out;
 }
 
 .signinPage {
@@ -48,32 +49,50 @@
   font-size: 3rem;
   transform: translateY(-2rem);
 }
-.signinPage main .signInContent p {
+.signinPage main .signInContent .signInDesc {
   width: 80%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
+  padding: 0.5rem 1rem;
 }
-.signinPage main .signInContent p img {
+.signinPage main .signInContent .signInDesc img {
   width: 2rem;
   height: 2rem;
   -o-object-fit: cover;
      object-fit: cover;
+  margin: 0 1rem;
+}
+.signinPage main .signInContent .signInDesc p {
+  font-family: "Courgette", cursive;
+  color: #d6f7e7;
+  font-size: medium;
+  font-weight: bold;
+  text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 .signinPage main .signInContent button {
-  width: 70%;
+  width: 50%;
   border: none;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 0.5rem 0;
   border-radius: 0.5rem;
   background-color: #d6f7e7;
   color: #1c2e35;
   display: flex;
+  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   text-align: center;
   cursor: pointer;
 }
+.signinPage main .signInContent button:hover {
+  transform: scale(1.05);
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
+}
 .signinPage main .signInContent button img {
-  width: 10%;
-  height: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
   -o-object-fit: cover;
      object-fit: cover;
 }

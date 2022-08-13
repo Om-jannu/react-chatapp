@@ -116,7 +116,10 @@ const Signin = () => {
       <main>
           <div className="signInContent">
             <h1>Alohaass</h1>
-            <p><img src="./images/grouppeople.png" alt="group of people logo" /><p>Group Chat Application <br /> to have fun with friends 😉</p></p>
+            <div className="signInDesc">
+              <img src="./images/grouppeople.png" alt="group of people logo" />
+              <p>Group Chat Application</p>
+            </div>
             <button className="signInButton" onClick={signInWithGoogle}><img src="./images/google.png" alt="google logo" /><p>Google</p>
             </button>
             <button className="signInButton" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="facebook logo" /><p>Facebook</p>
