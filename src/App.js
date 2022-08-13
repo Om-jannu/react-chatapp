@@ -3,8 +3,8 @@ import "./App.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import beachvdo from './component/video/beachvideo.mp4';
-import {FaGoogle} from "react-icons";
+import beachvdo from "./component/video/beachvideo.mp4";
+import { FaGoogle } from "react-icons";
 
 // firebase hooks start
 
@@ -13,13 +13,13 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 
 // firebase hooks ends
 firebase.initializeApp({
-  apiKey: "AIzaSyCHij4mcPuQhiCSGPvjfbB9wEV0dxD6CQY",
-  authDomain: "react-chatapp-cf8c7.firebaseapp.com",
-  projectId: "react-chatapp-cf8c7",
-  storageBucket: "react-chatapp-cf8c7.appspot.com",
-  messagingSenderId: "1069624741086",
-  appId: "1:1069624741086:web:5d0b6a2b15bd748956464f",
-  measurementId: "G-BS577HD9J9",
+  apiKey: `${process.env.REACT_APP_FIREBASE_APIKEY}`,
+  authDomain: `${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`,
+  projectId: `${process.env.REACT_APP_FIREBASE_PROJECTID}`,
+  storageBucket: `${process.env.REACT_APP_FIREBASE_STORAGEBUCKET}`,
+  messagingSenderId: `${process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID}`,
+  appId: `${process.env.REACT_APP_FIREBASE_APPID}`,
+  measurementId: `${process.env.REACT_APP_FIREBASE_MEASUREMENTID}`,
 });
 
 const auth = firebase.auth();
@@ -34,6 +34,7 @@ const App = () => {
         <Signout />
       </header>
       <section>{user ? <Chatroom /> : <Signin />}</section>
+      {/* <section><Chatroom/></section> */}
     </div>
   );
 };
@@ -110,26 +111,29 @@ const Signin = () => {
   return (
     <div className="signinPage">
       <video autoPlay loop muted>
-        <source src={beachvdo} type="video/mp4"/>
+        <source src={beachvdo} type="video/mp4" />
       </video>
-      
+
       <main>
-          <div className="signInContent">
-            <h1>Alohaass</h1>
-            <div className="signInDesc">
-              <img src="./images/grouppeople.png" alt="group of people logo" />
-              <p>Group Chat Application</p>
-            </div>
-            <button className="signInButton" onClick={signInWithGoogle}><img src="./images/google.png" alt="google logo" /><p>Google</p>
-            </button>
-            <button className="signInButton" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="facebook logo" /><p>Facebook</p>
-            </button>
+        <div className="signInContent">
+          <h1>Alohaass</h1>
+          <div className="signInDesc">
+            <img src="./images/grouppeople.png" alt="group of people logo" />
+            <p>Group Chat Application</p>
           </div>
-          <section>
+          <button className="signInButton" onClick={signInWithGoogle}>
+            <img src="./images/google.png" alt="google logo" />
+            <p>Google</p>
+          </button>
+          <button className="signInButton" onClick={signInWithFacebook}>
+            <img src="./images/facebook.png" alt="facebook logo" />
+            <p>Facebook</p>
+          </button>
+        </div>
+        <section>
           <img src="./images/chatHeroImage.png" alt="chat hero image" />
         </section>
       </main>
-        
     </div>
   );
 };
