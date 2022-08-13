@@ -10,6 +10,7 @@ import { FaGoogle } from "react-icons";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useEffect } from "react";
 
 // firebase hooks ends
 firebase.initializeApp({
@@ -30,9 +31,6 @@ const App = () => {
 
   return (
     <div>
-      <header>
-        <Signout />
-      </header>
       <section>{user ? <Chatroom /> : <Signin />}</section>
       {/* <section><Chatroom/></section> */}
     </div>
@@ -45,10 +43,8 @@ const Chatroom = () => {
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
   const dummy = useRef();
-
   const sendMessage = async (e) => {
     e.preventDefault();
-
     const { uid, photoURL } = auth.currentUser;
     await messageRef.add({
       text: formValue,
@@ -57,25 +53,43 @@ const Chatroom = () => {
       photoURL,
     });
     setFormValue("");
-    dummy.current.scrollIntoView({ behaviour: "smooth" });
+    dummy.current.scrollIntoView({behaviour : 'smooth'});
   };
 
   return (
-    <div>
-      <main>
-        {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-        <div ref={dummy}></div>
-      </main>
-      <form onSubmit={sendMessage}>
-        <input
-          value={formValue}
-          onChange={(e) => {
-            setFormValue(e.target.value);
-          }}
-        />
-        <button type="submit">Send</button>
-      </form>
+    <div className="chatRoom">
+      <video autoPlay loop muted>
+        <source src={beachvdo} type="video/mp4" />
+      </video>
+      <div className="chatMessageSection">
+        <div className="chatroomHeader">
+          <div className="chatroomHead">
+            <img src="./images/grouppeople.png" alt="group of people logo" />
+            <h1>Alohaass</h1>
+          </div>
+          <p>Don't Forget to Sign Out after you are Done Chatting</p>
+          <Signout />
+        </div>
+        <div className="chatroomContainer">
+          <div className="messagebox">
+            {messages &&
+              messages.map((msg) => <ChatMessage  key={msg.id} message={msg} />)}
+          </div>
+          <span ref={dummy}></span>
+          <div className="inputbox">
+            <form onSubmit={sendMessage}>
+              <input
+              placeholder="write something"
+                value={formValue}
+                onChange={(e) => {
+                  setFormValue(e.target.value);
+                }}
+              />
+              <button type="submit" disabled={!formValue}><img src="./images/paper-plane.png" alt="paperplane"/></button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -141,12 +155,13 @@ const Signin = () => {
 const Signout = () => {
   return (
     auth.currentUser && (
-      <button
+      <button className="logoutbtn"
         onClick={() => {
           auth.signOut();
         }}
       >
-        Sign out
+        <p>Sign Out</p>
+        <img src="./images/logout.png" alt="logout" />
       </button>
     )
   );
