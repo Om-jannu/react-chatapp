@@ -30,145 +30,107 @@ const App = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div>
-      <section>{user ? <Chatroom /> : <Signin />}</section>
-      {/* <section><Chatroom/></section> */}
+    <div className="App">
+      <header>
+        <h1>Alohaass</h1>
+        <SignOut />
+      </header>
+
+      <section>
+        {user ? <ChatRoom /> : <SignIn />}
+      </section>
+
     </div>
   );
-};
+}
 
-const Chatroom = () => {
-  const messageRef = firestore.collection("messages");
-  const query = messageRef.orderBy("createdAt").limit(25);
-  const [messages] = useCollectionData(query, { idField: "id" });
-  const [formValue, setFormValue] = useState("");
+function SignIn() {
+
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  }
+  const signInWithFacebook = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    auth.signInWithPopup(provider);
+  }
+
+  return (
+    <div className="signInPage">
+      <button className="sign-in" onClick={signInWithGoogle}><img src="./images/google.png" alt="" /> <p>Sign in with Google</p>
+      </button>
+      <button className="sign-in" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="" /> <p>Sign in with Google</p>
+      </button>
+      <p>Do not violate the community guidelines or you will be banned for life!</p>
+    </div>
+  )
+
+}
+
+function SignOut() {
+  return auth.currentUser && (
+    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+  )
+}
+
+
+function ChatRoom() {
   const dummy = useRef();
+  const messagesRef = firestore.collection('messages');
+  const query = messagesRef.orderBy('createdAt').limit(25);
+
+  const [messages] = useCollectionData(query, { idField: 'id' });
+
+  const [formValue, setFormValue] = useState('');
+
+
   const sendMessage = async (e) => {
     e.preventDefault();
+
     const { uid, photoURL } = auth.currentUser;
-    await messageRef.add({
+
+    await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      photoURL,
-    });
-    setFormValue("");
-    dummy.current.scrollIntoView({behaviour : 'smooth'});
-  };
+      photoURL
+    })
 
-  return (
-    <div className="chatRoom">
-      <video autoPlay loop muted>
-        <source src={beachvdo} type="video/mp4" />
-      </video>
-      <div className="chatMessageSection">
-        <div className="chatroomHeader">
-          <div className="chatroomHead">
-            <img src="./images/grouppeople.png" alt="group of people logo" />
-            <h1>Alohaass</h1>
-          </div>
-          <p>Don't Forget to Sign Out after you are Done Chatting</p>
-          <Signout />
-        </div>
-        <div className="chatroomContainer">
-          <div className="messagebox">
-            {messages &&
-              messages.map((msg) => <ChatMessage  key={msg.id} message={msg} />)}
-          </div>
-          <span ref={dummy}></span>
-          <div className="inputbox">
-            <form onSubmit={sendMessage}>
-              <input
-              placeholder="write something"
-                value={formValue}
-                onChange={(e) => {
-                  setFormValue(e.target.value);
-                }}
-              />
-              <button type="submit" disabled={!formValue}><img src="./images/paper-plane.png" alt="paperplane"/></button>
-            </form>
-          </div>
-        </div>
-        <div className="mobileLogout">
-          <h1>Alohaa</h1>
-          <Signout/>
-        </div>
-      </div>
-    </div>
-  );
-};
+    setFormValue('');
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+  }
 
-const ChatMessage = (props) => {
+  return (<>
+    <main>
+
+      {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+
+      <span ref={dummy}></span>
+
+    </main>
+
+    <form onSubmit={sendMessage}>
+
+      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+
+      <button type="submit" disabled={!formValue}>🕊️</button>
+
+    </form>
+  </>)
+}
+
+
+function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
-  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
-  return (
+
+  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+
+  return (<>
     <div className={`message ${messageClass}`}>
-      <img alt={auth.currentUser.displayName} src={photoURL} />
+      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
       <p>{text}</p>
     </div>
-  );
-};
-
-const Signin = () => {
-  const signInWithGoogle = () => {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider);
-    } catch (error) {
-      alert(error);
-    }
-  };
-  const signInWithFacebook = () => {
-    try {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      auth.signInWithPopup(provider);
-    } catch (error) {
-      alert(error);
-    }
-  };
-  return (
-    <div className="signinPage">
-      <video autoPlay loop muted>
-        <source src={beachvdo} type="video/mp4" />
-      </video>
-
-      <main>
-        <div className="signInContent">
-          <h1>Alohaass</h1>
-          <div className="signInDesc">
-            <img src="./images/grouppeople.png" alt="group of people logo" />
-            <p>Group Chat Application</p>
-          </div>
-          <button className="signInButton" onClick={signInWithGoogle}>
-            <img src="./images/google.png" alt="google logo" />
-            <p>Google</p>
-          </button>
-          <button className="signInButton" onClick={signInWithFacebook}>
-            <img src="./images/facebook.png" alt="facebook logo" />
-            <p>Facebook</p>
-          </button>
-        </div>
-        <section>
-          <img src="./images/chatHeroImage.png" alt="chat hero image" />
-        </section>
-      </main>
-    </div>
-  );
-};
-
-const Signout = () => {
-  return (
-    auth.currentUser && (
-      <button className="logoutbtn"
-        onClick={() => {
-          auth.signOut();
-        }}
-      >
-        <p>Sign Out</p>
-        <img src="./images/logout.png" alt="logout" />
-      </button>
-    )
-  );
+  </>)
 };
 
 export default App;

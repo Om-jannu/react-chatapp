@@ -1,398 +1,191 @@
-@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
-* {
-  margin: 0;
-  padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
+body {
+  background-color: rgb(58, 58, 58);
+}
+
+.App {
+  text-align: center;
+  max-width: 728px;
+  margin: 0 auto;
+}
+
+.App header {
+  background-color: #1fde8a;
+  height: 10vh;
+  min-height: 50px;
+  color: white;
+  position: fixed;
+  width: 100%;
+  max-width: 728px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  padding: 10px;
   box-sizing: border-box;
-  overflow-x: hidden;
-  transition: all 0.2s ease-in-out;
 }
-*::-webkit-scrollbar {
-  width: 1rem;
-  background-color: #5ae4a7;
+
+.App header h1 {
+  font-family: "Monoton", cursive;
+  letter-spacing: 0.1rem;
+  color: #1c2e35;
 }
-*::-webkit-scrollbar-thumb {
+
+.App section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+main {
+  padding: 10px;
+  height: 80vh;
+  margin: 10vh 0 10vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+main::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+main::-webkit-scrollbar-track {
+  background: #1c2e35;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #d6f7e7;
+}
+
+form {
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
   background-color: #1c2e35;
-  width: 0.5rem;
-  border-radius: 0.3rem;
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+form button {
+  width: 20%;
+  background-color: #1fde8a;
+}
+
+input {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.5rem;
+  background: #d6f7e7;
+  color: #1c2e35;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+}
+
+button {
+  background-color: #282c34; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sign-out {
+  color: white;
+  background: #1c2e35;
+  max-width: 400px;
+  border-radius: 0.5rem;
+}
+
+.signInPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signInPage p {
+  text-align: center;
+}
+
+.sign-in {
+  color: #282c34;
+  background: #1fde8a;
+  max-width: 400px;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sign-in img {
+  width: 2rem;
+  height: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.sign-in p {
+  padding: 0;
+}
+
+ul, li {
+  text-align: left;
+  list-style: none;
+}
+
+p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  word-wrap: break-word;
+}
+
+.message p {
+  text-align: left;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #5ae4a7;
+  align-self: flex-end;
+}
+
+.received p {
+  background: #e5e5ea;
+  color: black;
 }
 
 img {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.signinPage {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  overflow-y: hidden;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.signinPage video {
-  width: 10000px;
-  height: 10000px;
-}
-.signinPage main {
-  width: 70%;
-  height: 80%;
-  position: absolute;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-}
-.signinPage main .signInContent {
-  width: 50%;
-  height: 80%;
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  transform: translateX(2rem);
-  border-radius: 1rem;
-}
-.signinPage main .signInContent h1 {
-  color: #5ae4a7;
-  font-family: "Monoton", cursive;
-  font-size: 3rem;
-  transform: translateY(-2rem);
-}
-.signinPage main .signInContent .signInDesc {
-  width: 80%;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  text-align: left;
-  padding: 0.5rem 1rem;
-}
-.signinPage main .signInContent .signInDesc img {
-  width: 2rem;
-  height: 2rem;
-  -o-object-fit: cover;
-     object-fit: cover;
-  margin: 0 1rem;
-}
-.signinPage main .signInContent .signInDesc p {
-  font-family: "Courgette", cursive;
-  color: #d6f7e7;
-  font-size: medium;
-  font-weight: bold;
-  text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-}
-.signinPage main .signInContent button {
-  width: 50%;
-  border: none;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  border-radius: 0.5rem;
-  background-color: #d6f7e7;
-  color: #1c2e35;
-  display: flex;
-  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-}
-.signinPage main .signInContent button:hover {
-  transform: scale(1.05);
-  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
-}
-.signinPage main .signInContent button img {
-  width: 1.5rem;
-  height: 1.5rem;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.signinPage main .signInContent button p {
-  padding: 0 1rem;
-  font-size: large;
-  font-weight: bold;
-}
-.signinPage main section {
-  background-color: #d6f7e7;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-radius: 1rem;
-  width: 50%;
-  height: 100%;
-}
-.signinPage main section img {
-  width: 60%;
-  height: 60%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.chatRoom {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.chatRoom video {
-  position: fixed;
-}
-.chatRoom .chatMessageSection {
-  position: absolute;
-  right: 5%;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.chatRoom .chatMessageSection .chatroomHeader {
-  position: absolute;
-  left: 10%;
-  width: 30%;
-  height: 60%;
-  padding: 1rem;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  border-radius: 1rem;
-}
-.chatRoom .chatMessageSection .chatroomHeader p {
-  font-family: "Courgette", cursive;
-  color: #d6f7e7;
-  font-size: medium;
-  font-weight: bold;
-  text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-  padding-left: 3rem;
-}
-.chatRoom .chatMessageSection .chatroomHeader .chatroomHead {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.chatRoom .chatMessageSection .chatroomHeader .chatroomHead img {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 1rem;
-}
-.chatRoom .chatMessageSection .chatroomHeader .chatroomHead h1 {
-  color: #5ae4a7;
-  font-family: "Monoton", cursive;
-  font-size: 2rem;
-}
-.chatRoom .chatMessageSection .chatroomContainer {
-  position: relative;
-  right: -25%;
-  width: 50%;
-  height: 90%;
-  background-color: rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.2rem;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox {
-  padding: 1rem;
-  height: 90%;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .message {
-  display: block;
-  width: 100%;
-  word-wrap: break-word;
-  padding: 1rem;
-  margin: 0 1rem;
-  display: flex;
-  align-items: center;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .message img {
-  width: 3rem;
-  height: 3rem;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .message p {
-  padding: 0.7rem 1rem;
-  border-radius: 0.5rem;
-  word-wrap: break-word;
-  word-break: keep-all;
-  text-align: left;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .sent {
-  flex-direction: row-reverse;
-  float: right;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .sent p {
-  background-color: #5ae4a7;
-  margin-right: 1rem;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .received {
-  float: left;
-}
-.chatRoom .chatMessageSection .chatroomContainer .messagebox .received p {
-  background-color: #1c2e35;
-  color: #a4a4a4;
-  margin-left: 1rem;
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox form {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  flex-direction: row;
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox form input {
-  width: 85%;
-  height: 100%;
-  padding: 1rem;
-  background-color: #d6f7e7;
-  border: none;
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox form button {
-  width: 15%;
-  height: 100%;
-  padding: 1rem;
-  border: none;
-  background-color: #5ae4a7;
-  cursor: pointer;
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox form button:hover img {
-  transform: scale(1.5);
-}
-.chatRoom .chatMessageSection .chatroomContainer .inputbox form button img {
-  width: 0.9rem;
-  height: 0.9rem;
-}
-
-.logoutbtn {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  width: 70%;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
-  border: none;
-  background-color: #5ae4a7;
-  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.3);
-  margin-top: 1rem;
-  cursor: pointer;
-}
-.logoutbtn img {
-  width: 2rem;
-  height: 2rem;
-}
-.logoutbtn p {
-  font-size: medium;
-  font-weight: bold;
-  color: #1c2e35;
-}
-.logoutbtn:hover {
-  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
-}
-
-.mobileLogout {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .signinPage video {
-    display: none;
-  }
-  .signinPage main {
-    width: 100%;
-    height: 100%;
-    background-color: #5ae4a7;
-  }
-  .signinPage main .signInContent {
-    width: 100%;
-    height: 100%;
-  }
-  .signinPage main .signInContent h1 {
-    text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-  }
-  .signinPage main section {
-    display: none;
-  }
-  .chatRoom {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .chatRoom video {
-    position: fixed;
-  }
-  .chatRoom .chatMessageSection {
-    right: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .chatRoom .chatMessageSection .chatroomHeader {
-    display: none;
-  }
-  .chatRoom .chatMessageSection .chatroomContainer {
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  .chatRoom .chatMessageSection .chatroomContainer .messagebox {
-    padding: 0;
-  }
-  .chatRoom .chatMessageSection .chatroomContainer .messagebox .message {
-    width: 100%;
-    margin: 0;
-  }
-  .mobileLogout {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    background-color: #1c2e35;
-    padding: 0.7rem 1rem;
-  }
-  .mobileLogout h1 {
-    color: #5ae4a7;
-    font-family: "Monoton", cursive;
-    font-size: 2rem;
-    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-  }
-  .logoutbtn {
-    width: 40%;
-    box-shadow: none;
-    margin-top: 0;
-  }
+  margin: 2px 5px;
 }/*# sourceMappingURL=App.css.map */

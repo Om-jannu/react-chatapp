@@ -1,353 +1,195 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap');
-@mixin align($justify-content, $align-item, $text-align) {
-  justify-content: $justify-content;
-  align-items: $align-item;
-  text-align: $text-align;
-}
-@mixin widthandheight($width, $height) {
-  width: $width;
-  height: $height;
-}
 
 $primary-color: #5ae4a7;
 $secondary-color: #1c2e35;
-$tertiary-color: #a4a4a4;
+$tertiary-color: #1fde8a;
 $quatery-color: #d6f7e7;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  transition: all 0.2s ease-in-out;
-  font-family: 'Barlow', sans-serif;
-  &::-webkit-scrollbar{
-    width: 1rem;
-    background-color: #5ae4a7;
-  }
-  &::-webkit-scrollbar-thumb{
-    background-color: $secondary-color;
-    width: 0.5rem;
-    border-radius: 0.3rem;
-  }
+
+body {
+  background-color: rgb(58, 58, 58);
 }
-img {
-  object-fit: cover;
+
+
+.App {
+  text-align: center;
+  max-width: 728px;
+  margin: 0 auto;
 }
-.signinPage {
-  height: 100vh;
+
+.App header {
+  background-color: $tertiary-color;
+  height: 10vh;
+  min-height: 50px;
+  color: white;
+  position: fixed;
   width: 100%;
+  max-width: 728px;
+  top: 0;
   display: flex;
-  overflow-y: hidden;
-  @include align(center, center, center);
-  video {
-    @include widthandheight(10000px, 10000px);
-  }
-
-  main {
-    @include widthandheight(70%, 80%);
-    position: absolute;
-
-    display: flex;
-    @include align(space-evenly, center, center);
-
-    .signInContent {
-      @include widthandheight(50%, 80%);
-      backdrop-filter: blur(3px);
-      display: flex;
-      flex-direction: column;
-      @include align(center, center, center);
-      background-color: rgba(0, 0, 0, 0.2);
-      transform: translateX(2rem);
-      border-radius: 1rem;
-      h1 {
-        color: $primary-color;
-        font-family: "Monoton", cursive;
-        font-size: 3rem;
-        transform: translateY(-2rem);
-      }
-      .signInDesc {
-        width: 80%;
-        display: flex;
-        @include align(left, center, left);
-        padding: 0.5rem 1rem;
-        img {
-          @include widthandheight(2rem, 2rem);
-          object-fit: cover;
-          margin: 0 1rem;
-        }
-        p {
-          font-family: "Courgette", cursive;
-          color: $quatery-color;
-          font-size: medium;
-          font-weight: bold;
-          text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-        }
-      }
-      button {
-        width: 50%;
-        border: none;
-        padding: 0.5rem;
-        margin: 0.5rem 0;
-        border-radius: 0.5rem;
-        background-color: $quatery-color;
-        color: $secondary-color;
-        display: flex;
-        box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-        @include align(center, center, center);
-        cursor: pointer;
-        &:hover {
-          transform: scale(1.05);
-          box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
-        }
-        img {
-          @include widthandheight(1.5rem, 1.5rem);
-          object-fit: cover;
-        }
-        p {
-          padding: 0 1rem;
-          font-size: large;
-          font-weight: bold;
-        }
-      }
-    }
-    section {
-      background-color: $quatery-color;
-      border: 2px solid rgba(0, 0, 0, 0.5);
-      display: flex;
-      @include align(center, center, center);
-      border-radius: 1rem;
-      @include widthandheight(50%, 100%);
-      img {
-        @include widthandheight(60%, 60%);
-        object-fit: cover;
-      }
-    }
-  }
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  padding: 10px;
+  box-sizing: border-box;
 }
-.chatRoom {
-  @include widthandheight(100%, 100vh);
-  display: flex;
-  @include align(center, center, center);
-  video {
-    position: fixed;
-  }
-  .chatMessageSection {
-    position: absolute;
-    right: 5%;
-    @include widthandheight(100%, 100vh);
-    display: flex;
-    @include align(center, center, center);
-    .chatroomHeader {
-      position: absolute;
-      left: 10%;
-      @include widthandheight(30%, 60%);
-      padding: 1rem;
-      margin: auto;
-      display: flex;
-      @include align(center, center, left);
-      flex-direction: column;
-      background-color: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(2px);
-      border-radius: 1rem;      
-      p {
-        font-family: "Courgette", cursive;
-        color: $quatery-color;
-        font-size: medium;
-        font-weight: bold;
-        text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-        padding-left: 3rem;
-      }
-      .chatroomHead {
-        display: flex;
-        @include align(center, center, center);
-        img {
-          @include widthandheight(2rem, 2rem);
-          margin-right: 1rem;
-        }
-        h1 {
-          color: $primary-color;
-          font-family: "Monoton", cursive;
-          font-size: 2rem;
-        }
-      }
-    }
-    .chatroomContainer {
-      position: relative;
-      right: -25%;
-      @include widthandheight(50%, 90%);
-      background-color: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(2px);
-      display: flex;
-      flex-direction: column;
-      border-radius: 0.2rem;
-      .messagebox {
-        padding: 1rem;
-        height: 90%;
-        .message {
-          display: block;
-          width: 100%;
-          word-wrap: break-word;
-          padding: 1rem;
-          margin: 0 1rem;
-          display: flex;
-          align-items: center;
-          img {
-            @include widthandheight(3rem, 3rem);
-            border-radius: 50%;
-          }
-          p {
-            padding: 0.7rem 1rem;
-            border-radius: 0.5rem;
-            word-wrap: break-word;
-            word-break: keep-all;
-            text-align: left;
-          }
-        }
-        .sent {
-          flex-direction: row-reverse;
-          float: right;
-          p {
-            background-color: $primary-color;
-            margin-right: 1rem;
-          }
-        }
-        .received {
-          float: left;
-          p {
-            background-color: $secondary-color;
-            color: $tertiary-color;
-            margin-left: 1rem;
-          }
-        }
-      }
-      .inputbox {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        form {
-          @include widthandheight(100%, 100%);
-          display: flex;
-          @include align(space-evenly, center, center);
-          flex-direction: row;
-          input {
-            @include widthandheight(85%, 100%);
-            padding: 1rem;
-            background-color: $quatery-color;
-            border: none;
-          }
-          button {
-            @include widthandheight(15%, 100%);
-            padding: 1rem;
-            border: none;
-            background-color: $primary-color;
-            cursor: pointer;
-            &:hover img {
-              transform: scale(1.5);
-            }
-            img {
-              @include widthandheight(0.9rem, 0.9rem);
-            }
-          }
-        }
-      }
-    }
-  }
+.App header h1{
+  font-family: 'Monoton', cursive;
+  letter-spacing: 0.1rem;
+  color: $secondary-color;
 }
-.logoutbtn {
+.App section {
   display: flex;
-  @include align(space-evenly, center, center);
-  width: 70%;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+main {
+  padding: 10px;
+  height: 80vh;
+  margin: 10vh 0 10vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+main::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+main::-webkit-scrollbar-track {
+  background: $secondary-color;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: $quatery-color;
+}
+
+form {
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  background-color: $secondary-color;
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+form button {
+  width: 20%;
+  background-color: $tertiary-color;
+}
+
+
+input {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.5rem;
+  background: $quatery-color;
+  color: $secondary-color;
+  outline: none;
   border: none;
-  background-color: $primary-color;
-  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.3);
-  margin-top: 1rem;
-  cursor: pointer;
-  img {
-    @include widthandheight(2rem, 2rem);
-  }
-  p {
-    font-size: medium;
-    font-weight: bold;
-    color: $secondary-color;
-  }
-  &:hover {
-    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-  }
+  padding: 0 10px;
 }
-.mobileLogout{
-    display: none;
-  }
-@media (max-width: 600px) {
-  .signinPage {
-    video {
-      display: none;
-    }
-    main {
-      @include widthandheight(100%, 100%);
-      background-color: $primary-color;
 
-      .signInContent {
-        @include widthandheight(100%, 100%);
-        h1 {
-          text-shadow: -3px 3px 3px rgba(0, 0, 0, 0.5);
-        }
-      }
-      section {
-        display: none;
-      }
-    }
-  }
-  .chatRoom {
-    @include widthandheight(100%, 100vh);
-    display: flex;
-    @include align(center, center, center);
-    video {
-      position: fixed;
-    }
-    .chatMessageSection {
-        right: 0;
-      @include widthandheight(100%, 100vh);
-      display: flex;
-      @include align(center, center, center);
-      .chatroomHeader {
-        display: none;
-      }
-      .chatroomContainer {
-        left: 0;
-        @include widthandheight(100%, 100%);
-        background-color: rgba(0, 0, 0, 0.5);
-        .messagebox {
-          padding: 0;
-          .message {
-            width: 100%;
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
-  .mobileLogout{
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    @include align(space-evenly, center ,center);
-    width: 100%;
-    background-color: $secondary-color;
-    padding:0.7rem 1rem;
-    h1{
-        color: $primary-color;
-          font-family: "Monoton", cursive;
-          font-size: 2rem;
-          text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    }
-  }
-  .logoutbtn{
-  width: 40%;
-  box-shadow: none;
-  margin-top: 0;
+button {
+  background-color: #282c34; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.sign-out{
+  color: white;
+  background: $secondary-color;
+  max-width: 400px;
+  border-radius: 0.5rem;
+}
+.signInPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  p{
+    text-align: center;
+  }
+}
+.sign-in {
+  color: #282c34;
+  background: $tertiary-color;
+  max-width: 400px;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+  }
+  p{
+    padding: 0;
+  }
+}
+
+
+
+ul, li {
+  text-align: left;
+  list-style: none;
+}
+
+p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  
+  word-wrap: break-word;
+}
+.message p{
+  text-align: left;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: $primary-color;
+  align-self: flex-end;
+}
+.received p {
+  background: #e5e5ea;
+  color: black;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
 }
