@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow&family=Courgette&family=Monoton&family=Oleo+Script+Swash+Caps&display=swap");
 body {
   background-color: rgb(58, 58, 58);
+  font-family: "Poppins", sans-serif;
 }
 
 .App {
@@ -75,6 +76,7 @@ form {
 form button {
   width: 20%;
   background-color: #1fde8a;
+  border-left: 3px solid #1c2e35;
 }
 
 input {
@@ -92,12 +94,13 @@ button {
   background-color: #282c34; /* Green */
   border: none;
   color: white;
-  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   cursor: pointer;
   font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:disabled {
@@ -110,6 +113,19 @@ button:disabled {
   background: #1c2e35;
   max-width: 400px;
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sign-out img {
+  width: 2rem;
+  height: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.sign-out p {
+  padding: 1rem;
+  margin: auto;
 }
 
 .signInPage {
@@ -125,12 +141,13 @@ button:disabled {
 .sign-in {
   color: #282c34;
   background: #1fde8a;
-  max-width: 400px;
+  min-width: 300px;
   margin: 1rem auto;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 .sign-in img {
   width: 2rem;
@@ -139,7 +156,10 @@ button:disabled {
      object-fit: cover;
 }
 .sign-in p {
-  padding: 0;
+  padding: 0.5rem;
+  margin: auto;
+  color: #1c2e35;
+  font-weight: bold;
 }
 
 ul, li {
@@ -148,7 +168,7 @@ ul, li {
 }
 
 p {
-  max-width: 500px;
+  max-width: 70%;
   margin-bottom: 12px;
   line-height: 24px;
   padding: 10px 20px;
@@ -173,14 +193,14 @@ p {
 }
 
 .sent p {
-  color: white;
+  color: #1c2e35;
   background: #5ae4a7;
   align-self: flex-end;
 }
 
 .received p {
-  background: #e5e5ea;
-  color: black;
+  background: #d6f7e7;
+  color: #1c2e35;
 }
 
 img {
@@ -188,4 +208,34 @@ img {
   height: 40px;
   border-radius: 50%;
   margin: 2px 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .App header h1 {
+    font-size: larger;
+  }
+  .social a img {
+    width: 2rem;
+    height: 2rem;
+  }
+  .sign-out {
+    color: white;
+    background: #1c2e35;
+    max-width: 200px;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sign-out img {
+    width: 2rem;
+    height: 2rem;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .sign-out p {
+    font-size: medium;
+    padding: 0.5rem;
+    margin: auto;
+  }
 }/*# sourceMappingURL=App.css.map */

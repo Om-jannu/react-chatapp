@@ -3,16 +3,13 @@ import "./App.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import beachvdo from "./component/video/beachvideo.mp4";
-import { FaGoogle } from "react-icons";
 
 // firebase hooks start
-
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useEffect } from "react";
-
 // firebase hooks ends
+
 firebase.initializeApp({
   apiKey: `${process.env.REACT_APP_FIREBASE_APIKEY}`,
   authDomain: `${process.env.REACT_APP_FIREBASE_AUTHDOMAIN}`,
@@ -33,13 +30,21 @@ const App = () => {
     <div className="App">
       <header>
         <h1>Alohaass</h1>
+        <div className="social">
+          <a href="https://github.com/Om-jannu" target="_blank"><img src="./images/github.png" alt="github/om-jannu"/></a>
+          <a href="https://www.linkedin.com/in/om-jannu-60a004218/"target="_blank"><img src="./images/linkedin.png" alt="github/om-jannu"/></a>
+        </div>
         <SignOut />
       </header>
 
       <section>
         {user ? <ChatRoom /> : <SignIn />}
       </section>
-
+        {/* <div className="social">
+          <a href=""><img src="./images/github.png" alt="github/om-jannu"/></a>
+          <a href=""><img src="./images/instagram.png" alt="github/om-jannu"/></a>
+          <a href=""><img src="./images/linkedin.png" alt="github/om-jannu"/></a>
+        </div> */}
     </div>
   );
 }
@@ -59,7 +64,7 @@ function SignIn() {
     <div className="signInPage">
       <button className="sign-in" onClick={signInWithGoogle}><img src="./images/google.png" alt="" /> <p>Sign in with Google</p>
       </button>
-      <button className="sign-in" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="" /> <p>Sign in with Google</p>
+      <button className="sign-in" onClick={signInWithFacebook}><img src="./images/facebook.png" alt="" /> <p>Sign in with Facebook</p>
       </button>
       <p>Do not violate the community guidelines or you will be banned for life!</p>
     </div>
@@ -69,7 +74,8 @@ function SignIn() {
 
 function SignOut() {
   return auth.currentUser && (
-    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+    <button className="sign-out" onClick={() => auth.signOut()}> <img src="./images/logout.png" alt="" />
+    <p>Sign Out</p></button>
   )
 }
 
@@ -93,7 +99,8 @@ function ChatRoom() {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      photoURL
+      photoURL,
+      username : auth.currentUser.displayName
     })
 
     setFormValue('');
@@ -127,7 +134,7 @@ function ChatMessage(props) {
 
   return (<>
     <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt={auth.currentUser.displayName} />
       <p>{text}</p>
     </div>
   </>)
